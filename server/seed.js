@@ -1,6 +1,6 @@
 const db = require('./db')
 const {User, Tag} = require('./db/models')
-// const {green, red} = require('chalk')
+const {green, red} = require('chalk')
 
 // var Promise = require('bluebird');
 
@@ -28,7 +28,7 @@ const seed = async () => {
 // const syncDb = () => db.sync({ force: true });
 //syncDb();
 seed().catch(err => {
-  // console.error(red('Oh noes! Something went wrong!'))
+  console.error(red('Oh noes! Something went wrong!'))
   console.error(err)
   db.close()
 })
