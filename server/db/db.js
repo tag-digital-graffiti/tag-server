@@ -3,9 +3,12 @@ const pkg = require('../../package.json')
 
 // const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 
-const db = new Sequelize(`postgres://localhost:5432/tagdb`, {
-  logging: false
-})
+const db = new Sequelize(
+  process.env.DATABASE_URL || 'postgres://localhost:5432/tagdb',
+  {
+    logging: false // so we don't see all the SQL query made
+  }
+)
 
 module.exports = db
 
