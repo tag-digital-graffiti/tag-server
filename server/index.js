@@ -42,9 +42,9 @@ const startListening = () => {
 const syncDb = () => db.sync()
 
 async function bootApp() {
-  await syncDb()
-  await createApp()
   await startListening()
+  await createApp()
+  await syncDb()
 }
 
 bootApp()
