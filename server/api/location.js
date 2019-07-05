@@ -1,20 +1,26 @@
 const router = require('express').Router()
 const {Tag} = require('../db/models')
 const sequelize = require('sequelize')
-const Op = sequelize.Op
+const cloudinary = require('cloudinary').v2
 
+cloudinary.config({
+  cloud_name: 'coolcaps',
+  api_key: '851696833748766',
+  api_secret: '6xc3M9VoKgFxcLO2apfGdu6e0xs'
+})
+
+const Op = sequelize.Op
 router.get('/', async (req, res, next) => {
   const lat = parseFloat(req.query.lat)
   const long = parseFloat(req.query.long)
-
   try {
     const getNearByTag = await Tag.findAll({
       where: {
         lat: {
-          [Op.between]: [lat - 0.005, lat + 0.005]
+          [Op.between]: [lat - 0.002, lat + 0.002]
         },
         long: {
-          [Op.between]: [long - 0.005, long + 0.005]
+          [Op.between]: [long - 0.002, long + 0.002]
         }
       }
     })
@@ -24,16 +30,46 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    let lat = req.body.lat
-    let long = req.body.long
-    let arTagUrl = req.body.arTagUrl
-
-    await Tag.create({lat, long, arTagUrl})
+    const selectedTag = await Tag.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    if (selectedTag) {
+      res.json(selectedTag)
+    } else {
+      next()
+    }
   } catch (error) {
     next(error)
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    let lat = req.body.lat
+    let long = req.body.long
+    let imageData = req.body.imageData
+    await cloudinary.uploader.upload(
+      `data:image/png;base64,${imageData}`,
+      async function(error, result) {
+        if (result) {
+          const arTagUrl = result.url
+          try {
+            await Tag.create({lat, long, arTagUrl})
+          } catch (error) {
+            next(error)
+          }
+        } else {
+          res.send(error)
+        }
+      }
+    )
+    res.end()
+  } catch (error) {
+    next(error)
+  }
+})
 module.exports = router
