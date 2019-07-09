@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Tag} = require('../db/models')
+const {Tag, User} = require('../db/models')
 const sequelize = require('sequelize')
 const cloudinary = require('cloudinary').v2
 
@@ -22,9 +22,27 @@ router.get('/', async (req, res, next) => {
         long: {
           [Op.between]: [long - 0.002, long + 0.002]
         }
-      }
+      },
+      include: [
+        {
+          model: User
+        }
+      ]
     })
     res.json(getNearByTag)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/tags', async (req, res, next) => {
+  try {
+    const allTags = await Tag.findAll()
+    if (allTags) {
+      res.json(allTags)
+    } else {
+      next()
+    }
   } catch (error) {
     next(error)
   }
@@ -35,7 +53,12 @@ router.get('/:id', async (req, res, next) => {
     const selectedTag = await Tag.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [
+        {
+          model: User
+        }
+      ]
     })
     if (selectedTag) {
       res.json(selectedTag)
@@ -52,21 +75,20 @@ router.post('/', async (req, res, next) => {
     let lat = req.body.lat
     let long = req.body.long
     let imageData = req.body.imageData
-    await cloudinary.uploader.upload(
-      `data:image/png;base64,${imageData}`,
-      async function(error, result) {
-        if (result) {
-          const arTagUrl = result.url
-          try {
-            await Tag.create({lat, long, arTagUrl})
-          } catch (error) {
-            next(error)
-          }
-        } else {
-          res.send(error)
+    let userId = req.body.userId
+
+    await cloudinary.uploader.upload(imageData, async function(error, result) {
+      if (result) {
+        const arTagUrl = result.url
+        try {
+          await Tag.create({lat, long, arTagUrl, userId})
+        } catch (error) {
+          next(error)
         }
+      } else {
+        res.send(error)
       }
-    )
+    })
     res.end()
   } catch (error) {
     next(error)
