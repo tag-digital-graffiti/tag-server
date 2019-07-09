@@ -5,8 +5,8 @@ const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
   cloud_name: 'coolcaps',
-  api_key: '851696833748766',
-  api_secret: '6xc3M9VoKgFxcLO2apfGdu6e0xs'
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
 const Op = sequelize.Op
