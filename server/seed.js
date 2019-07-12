@@ -40,8 +40,8 @@ const seed = async () => {
 
   const tagTwo = await Tag.create({
     imageUrl: '75 Wall St',
-    lat: 40.716006,
-    long: -73.845722,
+    lat: 40.7049444,
+    long: -74.0091773,
     assetUrl: 'https://i.imgur.com/IiDUaeJ.png',
     arTagUrl:
       'https://res.cloudinary.com/coolcaps/image/upload/v1562872857/vw35iovjjnf3mjcy43xa.png',
@@ -53,8 +53,7 @@ const seed = async () => {
     lat: 40.7049444,
     long: -74.0091773,
     assetUrl: 'https://i.imgur.com/7QqWk03.png',
-    arTagUrl:
-      'https://res.cloudinary.com/coolcaps/image/upload/v1562800530/kmx22bthahww3m38iitp.png',
+    arTagUrl: 'https://i.imgur.com/hF8Okvi.png',
     userId: 4
   })
 
