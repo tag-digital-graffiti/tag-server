@@ -38,6 +38,16 @@ const seed = async () => {
     userId: 4
   })
 
+  const tagSeven = await Tag.create({
+    imageUrl: '75 Wall St',
+    lat: 40.7049444,
+    long: -74.0091771,
+    assetUrl: 'https://i.imgur.com/qUS6CBj.jpg',
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562951499/svaj4zj84tuifk2p7okm.png',
+    userId: 4
+  })
+
   const tagTwo = await Tag.create({
     imageUrl: '75 Wall St',
     lat: 40.7049444,
