@@ -9,12 +9,12 @@ const seed = async () => {
 
   // seed your database here!
   const userOne = await User.create({
-    username: 'wei',
+    username: 'Grapher',
     password: '1234'
   })
 
   const userTwo = await User.create({
-    username: 'lydie',
+    username: 'Banksy',
     password: '1234'
   })
 
@@ -24,7 +24,7 @@ const seed = async () => {
   })
 
   const userFour = await User.create({
-    username: 'maddie',
+    username: 'Maddog',
     password: '1234'
   })
 
@@ -33,8 +33,9 @@ const seed = async () => {
     lat: 40.7049444,
     long: -74.0091771,
     assetUrl: 'https://i.imgur.com/qUS6CBj.jpg',
-    arTagUrl: 'https://i.imgur.com/p99IbXG.png',
-    userId: 3
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562871027/jdqkivwkkrir0cmee3hv.png',
+    userId: 4
   })
 
   const tagTwo = await Tag.create({
@@ -42,8 +43,9 @@ const seed = async () => {
     lat: 40.716006,
     long: -73.845722,
     assetUrl: 'https://i.imgur.com/IiDUaeJ.png',
-    arTagUrl: 'https://i.imgur.com/IiDUaeJ.png',
-    userId: 1
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562872857/vw35iovjjnf3mjcy43xa.png',
+    userId: 4
   })
 
   const tagThree = await Tag.create({
@@ -51,8 +53,9 @@ const seed = async () => {
     lat: 40.7049444,
     long: -74.0091773,
     assetUrl: 'https://i.imgur.com/7QqWk03.png',
-    arTagUrl: 'https://i.imgur.com/7QqWk03.png',
-    userId: 2
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562800530/kmx22bthahww3m38iitp.png',
+    userId: 4
   })
 
   const tagFour = await Tag.create({
@@ -60,8 +63,9 @@ const seed = async () => {
     lat: 40.629501,
     long: -73.985001,
     assetUrl: 'https://i.imgur.com/qUS6CBj.jpg',
-    arTagUrl: 'https://i.imgur.com/p99IbXG.png',
-    userId: 2
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562798486/xjeurmkbhtsld0xi6ysj.png',
+    userId: 4
   })
 
   const tagFive = await Tag.create({
@@ -69,8 +73,9 @@ const seed = async () => {
     lat: 40.753849,
     long: -73.978435,
     assetUrl: 'https://i.imgur.com/IiDUaeJ.png',
-    arTagUrl: 'https://i.imgur.com/IiDUaeJ.png',
-    userId: 2
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562363991/nukg2iiszvqybgynbyyp.png',
+    userId: 1
   })
 
   const tagSix = await Tag.create({
@@ -78,7 +83,8 @@ const seed = async () => {
     lat: 40.779756,
     long: -73.955071,
     assetUrl: 'https://i.imgur.com/7QqWk03.png',
-    arTagUrl: 'https://i.imgur.com/7QqWk03.png',
+    arTagUrl:
+      'https://res.cloudinary.com/coolcaps/image/upload/v1562798757/ido9zxutdvk6bbqdzski.png',
     userId: 2
   })
 
